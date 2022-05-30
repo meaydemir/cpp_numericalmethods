@@ -1,23 +1,32 @@
 #include <iostream>
+#include <cmath>
 #include <random>
+#include <algorithm>
+#include "mc_utils.h"
 
 
 int main()
 {
     // Specify number of paths to simulate
-    int N{10};
+    unsigned long long int N{10};
 
-    // Create vector for storing standard normal random variables
-    std::vector<double> std_norm_vec;
-    std_norm_vec.reserve(N);
+    // Specify input parameters
+    double S0{50};
+    double K{50};
+    double T{0.5};
+    double sigma{0.15};
+    double r{0.02};
+    double q{0.0};
 
-    // Generate standard normal random variables and store in vector
-    std::random_device rd; // random number generator
-    std::normal_distribution<> std_normal_object(0, 1); // standard normal object instantiation
-    for (int i = 0; i < N; i++)
+    // Generate GBM paths
+    std::vector<double> s_vec{generate_gbm_paths(N, S0, T, sigma, r, q)};
+
+    // Calculate payoffs
+    std::vector<double> payoff_vec(N, 0);
+    for (std::vector<double>::size_type i = 0; i < s_vec.size(); i++)
     {
-        std_norm_vec[i] = std_normal_object(rd);
-        std::cout<< std_norm_vec[i] << '\n';
+        payoff_vec[i] = std::max(s_vec[i] - K, 0.0);
+        std::cout << payoff_vec[i] << '\n';
     }
 
     return 0;

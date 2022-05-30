@@ -10,7 +10,14 @@
 				"-g",
 				"${fileDirname}/*.cpp", //"${file}",
 				"-o",
-				"${fileDirname}\\${fileBasenameNoExtension}.exe"
+				"${fileDirname}\\${fileBasenameNoExtension}.exe",
+				"-pedantic-errors",
+				"-Wall",
+				"-Weffc++",
+				"-Wextra", 
+				"-Wsign-conversion",
+				"-Werror",
+				"-std=c++17"
 			],
 			"options": {
 				"cwd": "${fileDirname}"
