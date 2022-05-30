@@ -6,20 +6,11 @@
 			"label": "C/C++: g++.exe build active file",
 			"command": "C:\\msys64\\mingw64\\bin\\g++.exe",
 			"args": [
-				"-std=c++17",
 				"-fdiagnostics-color=always",
 				"-g",
-				"${workspaceFolder}\\*.cpp",
+				"${fileDirname}/*.cpp", //"${file}",
 				"-o",
-				"${fileDirname}\\${fileBasenameNoExtension}.exe",
-				"-pedantic-errors",
-				"-Wall",
-				"-Weffc++",
-				"-Wextra",
-				"-Wsign-conversion",
-				"-Wconversion",
-				"-Warith-conversion",
-				"-Werror",
+				"${fileDirname}\\${fileBasenameNoExtension}.exe"
 			],
 			"options": {
 				"cwd": "${fileDirname}"
@@ -27,10 +18,7 @@
 			"problemMatcher": [
 				"$gcc"
 			],
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			},
+			"group": "build",
 			"detail": "compiler: C:\\msys64\\mingw64\\bin\\g++.exe"
 		}
 	]
