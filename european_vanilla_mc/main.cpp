@@ -9,16 +9,17 @@
 int main()
 {
     // Specify number of paths to simulate
-    unsigned long long int N{10000000};
+    unsigned long long int N{1000000};
 
     // Specify input parameters
-    double S0{50};
-    double K{50};
-    double T{0.5};
-    double sigma{0.15};
-    double r{0.02};
+    double S0{100};
+    double K{100};
+    double T{1};
+    double sigma{0.2};
+    double r{0.05};
     double q{0.0};
 
+    std::cout << "Number of Paths: " << N << std::endl;
     std::cout << "Underlying:      " << S0 << '\n';
     std::cout << "Strike:          " << K << '\n';
     std::cout << "Risk-Free Rate:  " << r << '\n';
