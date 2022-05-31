@@ -47,5 +47,5 @@ double get_bs_mc_option_price(const unsigned long long int& N, const char& type,
         }
 
         // Calculate average discounted payoff under risk neutral measure
-        return 1.0/s_vec.size()*exp(-r*T)*payoff_sum;
+        return 1.0/static_cast<double>(N)*exp(-r*T)*payoff_sum;
     }
