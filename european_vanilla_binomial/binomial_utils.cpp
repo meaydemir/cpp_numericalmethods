@@ -17,19 +17,21 @@ std::vector<double> linspace(double start, double end, unsigned long long int N)
 }
 
 
-double recurse_tree(std::vector<double>& v_curr, unsigned long long int N,
+double iterate_tree(std::vector<double>& v_curr,
                     double r, double dt, double p, double q)
 {
-    // Iterate backwards in tree to obtain option price
-    while (v_curr.size() > 1)
-    {
-        for (std::vector<double>::size_type i = 0; i < v_curr.size() - 1; i++)
-        {
-            v_curr[i] = exp(-r*dt)*(p*v_curr[i] + q*v_curr[i+1]); // Calculate the value at each node
-        }
-        v_curr.pop_back();
 
-        return recurse_tree(v_curr, N, r, dt, p, q);
+    unsigned long long int N{v_curr.size()};
+    unsigned long long int j{0};
+    double discount_factor{exp(-r*dt)};
+
+    while(j < N)
+    {
+        for (std::vector<double>::size_type i = 0; i < N - j - 1; i++)
+        {
+            v_curr[i] = discount_factor*(p*v_curr[i] + q*v_curr[i+1]); // Calculate the value at each node
+        }
+        j++;
     }
 
     return v_curr[0];
@@ -65,6 +67,6 @@ double get_bs_price_binomial(char type, double S0, double K, double T, double si
         }
     }
 
-    // Calculate BS option price by recursing through binomial tree
-    return recurse_tree(v_curr, N, r, dt, p, q);
+    // Calculate BS option price by iterating backwards through binomial tree
+    return iterate_tree(v_curr, r, dt, p, q);
 }
