@@ -17,20 +17,19 @@ std::vector<double> linspace(double start, double end, unsigned long long int N)
 }
 
 
-double recurse_tree(const std::vector<double>& v_curr, unsigned long long int N,
+double recurse_tree(std::vector<double>& v_curr, unsigned long long int N,
                     double r, double dt, double p, double q)
 {
     // Iterate backwards in tree to obtain option price
     while (v_curr.size() > 1)
     {
-        unsigned long long int M{v_curr.size() - 1};
-        std::vector<double> v_prev(M);
-
-        for (std::vector<double>::size_type i = 0; i < M; i++)
+        for (std::vector<double>::size_type i = 0; i < v_curr.size() - 1; i++)
         {
-            v_prev[i] = exp(-r*dt)*(p*v_curr[i] + q*v_curr[i+1]); // Calculate the value at each node
+            v_curr[i] = exp(-r*dt)*(p*v_curr[i] + q*v_curr[i+1]); // Calculate the value at each node
         }
-        return recurse_tree(v_prev, N, r, dt, p, q);
+        v_curr.pop_back();
+
+        return recurse_tree(v_curr, N, r, dt, p, q);
     }
 
     return v_curr[0];

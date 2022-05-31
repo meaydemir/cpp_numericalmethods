@@ -10,7 +10,7 @@
 std::vector<double> linspace(double start, double end, unsigned long long int N);
 
 
-double recurse_tree(const std::vector<double>& v_curr, unsigned long long int N,
+double recurse_tree(std::vector<double>& v_curr, unsigned long long int N,
                     double r, double dt, double p, double q);
 
 
