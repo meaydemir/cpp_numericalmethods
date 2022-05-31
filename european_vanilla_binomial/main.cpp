@@ -2,19 +2,7 @@
 #include <cmath>
 #include <vector>
 #include <algorithm>
-
-
-std::vector<double> linspace(double start, double end, unsigned long long int N)
-{   
-    std::vector<double> v(N);
-    for (std::vector<double>::size_type i = 0; i <= v.size(); i++)
-    {
-        v[i] = start + i*(end - start)/static_cast<double>(N);
-        //std::cout << v[i] << '\n';
-    }
-
-    return v;
-}
+#include "binomial_utils.h"
 
 
 int main()
@@ -26,32 +14,16 @@ int main()
     double sigma{0.2};
     double r{0.05};
     double div_q{0.0};
-    unsigned long long int N{1}; // Number of steps
-
-    // Specified up/down constants allow convergence to black-scholes solution
-    double u{exp(sigma*pow(T/static_cast<double>(N), 0.5))};
-    double d{1.0/u};
-    std::cout << u << '\n';
-    std::cout << d << '\n';
+    unsigned long long int N{10000}; // Number of steps
    
-    // Build time array
-    std::vector<double> t_array{linspace(0.0, T, N)};
-    double dt{t_array[1] - t_array[0]};
-
-    // Risk-neutral probabilities
-    double p{(exp((r - div_q)*dt)-d)/(u-d)};
-    double q{1 - p};
-
-    // Initialize with boundary conditions
-    std::vector<double> v_curr(pow(2, N));
-    for (std::vector<double>::size_type i = 0; i <= N; i++)
-    {
-        v_curr[i] = std::max(S0*pow(u, (N-i))*pow(d, i) - K, 0.0);
-        std::cout << v_curr[i] << '\n';
-    }
-    std::cout << v_curr.size() << '\n';
-    std::cout << q << '\n';
-
+    std::cout << "Number of Steps: " << N << std::endl;
+    std::cout << "Underlying:      " << S0 << '\n';
+    std::cout << "Strike:          " << K << '\n';
+    std::cout << "Risk-Free Rate:  " << r << '\n';
+    std::cout << "Volatility:      " << sigma << '\n';
+    std::cout << "Maturity:        " << T << '\n';
+    std::cout << "Call Price: " << get_bs_price_binomial('c', S0, K, T, sigma, r, div_q, N) << '\n';
+    std::cout << "Put Price: " << get_bs_price_binomial('p', S0, K, T, sigma, r, div_q, N) << '\n';
 
     return 0;
 } 
