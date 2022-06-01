@@ -9,8 +9,9 @@
 				"-fdiagnostics-color=always",
 				"-g",
 				"${fileDirname}/*.cpp",
-				"${workspaceFolder}/include_cpp/*.cpp", // Compiling cpp files in cpp package directory
-				"-o",
+				"${workspaceFolder}/include_cpp/*.cpp", // Debugging features for cpp files in cpp package directory		
+				"-o", // Compile & link
+
 				"${fileDirname}\\${fileBasenameNoExtension}.exe",
 				"-I", // Add header file directory to compiler path
 				"${workspaceFolder}/include", // Add header file directory to compiler path
