@@ -2,13 +2,13 @@
 #define StatisticalDistribution_H
 
 #include <cmath>
-
+const double M_PI = 3.14159265358979323846;
 
 class StatisticalDistribution
 {
 public:
     StatisticalDistribution(); // constructor
-    ~StatisticalDistribution(); // destructor
+    virtual ~StatisticalDistribution(); // destructor
 
     virtual double pdf(const double& x) = 0; // pure virtual method
     virtual double cdf(const double& x) = 0; // pure virtual method
@@ -20,7 +20,7 @@ class StandardNormal: public StatisticalDistribution
 {
 public:
     StandardNormal(); // constructor
-    ~StandardNormal(); // destructor
+    virtual ~StandardNormal(); // destructor
 
     double pdf(const double& x); // PDF for standard normal
     double cdf(const double& x);

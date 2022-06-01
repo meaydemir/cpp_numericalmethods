@@ -8,16 +8,19 @@
 			"args": [
 				"-fdiagnostics-color=always",
 				"-g",
-				"${fileDirname}/*.cpp", //"${file}",
+				"${fileDirname}/*.cpp",
+				"${workspaceFolder}/include_cpp/*.cpp", // Compiling cpp files in cpp package directory
 				"-o",
 				"${fileDirname}\\${fileBasenameNoExtension}.exe",
+				"-I", // Add header file directory to compiler path
+				"${workspaceFolder}/include", // Add header file directory to compiler path
 				"-pedantic-errors",
 				"-Wall",
 				"-Weffc++",
 				"-Wextra", 
 				"-Wsign-conversion",
 				"-Werror",
-				"-std=c++17"
+				"-std=c++17",
 			],
 			"options": {
 				"cwd": "${fileDirname}"
