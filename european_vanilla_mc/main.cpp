@@ -9,7 +9,7 @@
 int main()
 {
     // Specify number of paths to simulate
-    unsigned long long int N{10000};
+    unsigned long long int N{100000};
 
     // Specify input parameters
     double S0{100};

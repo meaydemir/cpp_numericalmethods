@@ -9,7 +9,6 @@
 
 std::vector<double> linspace(double start, double end, unsigned long long int N);
 
-
 double iterate_tree(std::vector<double>& v_curr,
                     double r, double dt, double p, double q);
 
