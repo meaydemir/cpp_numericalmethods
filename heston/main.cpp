@@ -3,21 +3,20 @@
 #include <cmath>
 #include <algorithm>
 #include <random>
-#include "StatisticalDistribution.h"
 #include "binomial_utils.h"
 
 
 int main()
 {
     // Specify input parameters
-    char type{'p'};
+    char type{'c'};
     double S0{50};
     double K{50};
     double T{0.5};
     double r{0.02};
     double q{0.0};
-    unsigned long long int N{10000}; // Number of steps
-    int M{10000}; // Number of simulations
+    unsigned long long int N{1000}; // Number of steps
+    int M{1000}; // Number of simulations
 
     // Build time array
     std::vector<double> t_array{linspace(0.0, T, N)};
