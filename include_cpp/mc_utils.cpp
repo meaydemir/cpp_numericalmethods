@@ -4,6 +4,7 @@
 #include <vector>
 #include <random>
 
+
 std::vector<double> generate_gbm_paths(const unsigned long long int& N, const double& S0,
                                        const double& T, const double& sigma, const double& r, 
                                        const double& q)
@@ -13,11 +14,12 @@ std::vector<double> generate_gbm_paths(const unsigned long long int& N, const do
 
         // Generate standard normal random variables and store in vector
         std::random_device rd; // random number generator
+        std::mt19937 gen{rd()};
         std::normal_distribution<> std_normal_object(0, 1); // standard normal object instantiation
 
         for (auto& path : s_vec)
         {
-            path = S0*exp((r - q - 0.5*pow(sigma, 2))*T + sigma*pow(T, 0.5)*std_normal_object(rd));
+            path = S0*exp((r - q - 0.5*pow(sigma, 2))*T + sigma*pow(T, 0.5)*std_normal_object(gen));
         }
 
         return s_vec;
